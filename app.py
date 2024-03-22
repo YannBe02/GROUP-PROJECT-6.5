@@ -17,6 +17,19 @@ if st.button("Us"):
              We are a team of 5 students at the University of St. Gallen who decided te create a develop to easily find a restaurant when you don't know what and where to eat!
              """)
 
+st.subheader("Point of interests")
+modules = [
+    "Corporate",
+    "Social",
+    "Charity",
+    "Sports",
+]
+selected_modules = st.multiselect("Select the topics you're interested in:", modules)
+for module in selected_modules:
+    st.write(f"📘 {module}")
+
+
+
 st.subheader("Type of Food")
 food = st.text_input("Enter the type of food you want to enjoy", placeholder="Your food here...")
 if food != "":
