@@ -3,19 +3,12 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-st.set_page_config(page_title="GROUP 6.5", page_icon=":computer:")
+st.set_page_config(page_title="UNICLUBS", page_icon=":computer:")
 
-st.title("WELCOME TO GROUP 6.5")
+st.title("WELCOME TO UNICLUBS")
 st.write("""
-Here is the place where we will develop our website for the Computer Science Project
+We designed this website to help you finding the best club corresponding to your criteria
 """)
-
-st.subheader("Who are we?")
-if st.button("Us"):
-    st.write("We are Group 6.5!")
-    st.write("""
-             We are a team of 5 students at the University of St. Gallen who decided te create a develop to easily find a restaurant when you don't know what and where to eat!
-             """)
 
 st.subheader("Point of interests")
 modules = [
@@ -29,11 +22,21 @@ for module in selected_modules:
     st.write(f"📘 {module}")
 
 
+st.subheader("Language(s)")
+languages = [
+    "English",
+    "German",
+    "French",
+    "Spanish",
+    "Italian",
+    "Chinese",
+    "Portuguese",
+    "Arabic",
+]
 
-st.subheader("Type of Food")
-food = st.text_input("Enter the type of food you want to enjoy", placeholder="Your food here...")
-if food != "":
-    st.write(f"You want to eat {food}! Thank you for choosing our website, we will help you to find your desired food!")
+selected_languages = st.multiselect("Select the language(s) you wish to speak", languages)
+for language in selected_languages:
+    st.write(f"You've selected {language}")
 
 st.subheader("Location")
 location = st.text_input("Where do you want to eat?", placeholder="Where you want to eat...")
@@ -41,16 +44,23 @@ if location != "":
     st.write(f"You are looking to eat in {location}! We are finding your food!")
 
 st.subheader("Who is eating?")
-number_of_people = st.radio(
-    "Select the number of people",
-    ("1", "2", "3", "4", "5+")
+number_of_members = st.radio(
+    "Select the number of members",
+    ("1", "10", "50", "100", "200", "300+")
 )
-if {number_of_people} == {"1"}:
-    st.write(f"You've selected {number_of_people} person is eating!")
+if {number_of_members} == {"1"}:
+    st.write(f"You've selected {number_of_members} member in the club!")
 else:
-    st.write(f"You've selected {number_of_people} people are eating!")
+    st.write(f"You've selected {number_of_members} members in the club!")
 
-
+st.subheader("Who are we?")
+if st.button("Us"):
+    st.write("We are Group 6.5!")
+    st.write("""
+             We are a team of 5 students at the University of St. Gallen who decided to create a website to easily find a club when you don't know what to do out 
+             out of the University!
+             """)
+    
 #It does not work as it should
 st.subheader("How many people in common")
 common = st.slider("Select", min_value=1.0, max_value=12.0, step=1.0, value=6.0)
