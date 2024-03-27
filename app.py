@@ -38,16 +38,17 @@ selected_languages = st.multiselect("Select the language(s) you wish to speak", 
 for language in selected_languages:
     st.write(f"You've selected {language}")
 
-st.subheader("Location")
-location = st.text_input("Where do you want to eat?", placeholder="Where you want to eat...")
-if location != "":
-    st.write(f"You are looking to eat in {location}! We are finding your food!")
+st.subheader("Other languages")
+other_language = st.text_input("If you did not find the desired languages, which ones do you wish?", placeholder="Type the language(s)...")
+if other_language != "":
+    st.write(f"You are looking for a club speaking {other_language}! We are looking forward to help you finiding your dreamed club!")
 
-st.subheader("Who is eating?")
+st.subheader("How big should be the club?")
 number_of_members = st.radio(
     "Select the number of members",
     ("1", "10", "50", "100", "200", "300+")
 )
+    
 if {number_of_members} == {"1"}:
     st.write(f"You've selected {number_of_members} member in the club!")
 else:
