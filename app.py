@@ -12,10 +12,16 @@ We designed this website to help you finding the best club corresponding to your
 
 st.subheader("Point of interests")
 modules = [
-    "Corporate",
-    "Social",
-    "Charity",
+    "AV",
+    "Networking and Think Tanks",
+    "Culture and Interests",
     "Sports",
+    "Business and Investments",
+    "International Networks",
+    "Social and Political Engagement",
+    "Student Union",
+    "Cantons",
+    "Industry Focus",
 ]
 selected_modules = st.multiselect("Select the topics you're interested in:", modules)
 for module in selected_modules:
