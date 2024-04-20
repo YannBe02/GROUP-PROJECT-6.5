@@ -7,7 +7,7 @@ st.set_page_config(page_title="UNICLUBS", page_icon=":computer:")
 
 st.title("WELCOME TO UNICLUBS")
 st.write("""
-We designed this website to help you finding the best club corresponding to your criteria
+We designed this website to help you find the best club corresponding to your criteria
 """)
 
 st.subheader("Point of interests")
