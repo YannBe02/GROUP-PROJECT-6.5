@@ -53,12 +53,13 @@ st.subheader("How big should be the club?")
 number_of_members = st.radio(
     "Select the number of members",
     ("1", "10", "50", "100", "200", "300+")
-)
+) #could even use a slider
+
     
 if {number_of_members} == {"1"}:
     st.write(f"You've selected {number_of_members} member in the club!")
 else:
-    st.write(f"You've selected {number_of_members} members in the club!")
+    st.write(f"You've selected {number_of_members} members in the club!") #why the if condition?
 
 st.subheader("Who are we?")
 if st.button("Us"):
