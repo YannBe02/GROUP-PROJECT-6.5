@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "corded-photon-419014",
+  "private_key_id": "325d4555dfd61c6db7a6a24dd1d7f9f79faf7c01",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDeE2hcVyF81t0e\ndl6qlvp1FjHC/srUgDwVzuOFAd30LjyLlzAUCwmXa81V5/YDUu3oq6cWWmGbaUCx\nJkyBjeiWgaqDlgeo7idAoissvmZ2lOqbpT/il2RtuICsvzYS+MeUoFPN5tlEWGXY\n3/lN9Ai1D42704uaIy3vRnLaRd2qjoUtIvOSUgTCLWx9XjTlWlRu5yhk2EkPVNo5\nM627He3iGkgC0W08Kx6d/L0GLRlysCe/BKMG3RYFKf94FnOoDWvbtCCytVfWbvlh\nFCmkTpFOLeM2p2rjE8OZ3daLj1VbEk4N6on56QvZf8G0NlC8x+vBgnIVZdXv3ESi\niqYZkdArAgMBAAECggEAYMu5ycHqpUTsFWqHwbhUC7P0VaeEFhKc3e6TCfbx3QxI\nNJneCWZ0NE13LzIPb4x2iVtEVYBomfpLCcwFPdTyY6O6BGfhB9diQZBN3E9TTu2C\nwvvIuEW/rvlkEKe5dJR+PYCSdqVf3yPepKSfQESVhQH2B7/h0fnyfCBLUGtyfnOX\ndhi0z5KouhSSI6KZsgqwjdu8z6yHUA8NabWvH8idgxiUZbZFALXPdEG5hZRBePWk\nMgHnwABCimBWNh7Hg77SkWntf49xNXgTow1QmgKCncD4KMnfNuWh6Hsw1sg72mAH\nS3xGbpm/D3rkmimGrdpjyIFv7IdYwT0M3FQ4y0HppQKBgQD5RIcVH7e8EBalo16H\nWV0iNtLyYM0vmDrobRmh8Uury6CAfstD58dJE8H/wU98CnJ6LQ8FModyhZhTyAFx\nGOcjqlJb7ewBS9D7h2eJULkfm+4hsz6GEq6gG1CLSHiYOgFtMzyebbweNN0wqyuD\n1Y0Ziga1G/b5waBG6KutoHvHvwKBgQDkEt8aBOV2Wqwdf1juO3V0WkikDgYZT+Ye\nS4eQ4ZhRLFZbkCJwTH3kzSjUvxEuUrDtFynDZfyv9onvj5PWR0W8PgyuWKKiQ/ff\npc2y2iwGTvW34alNe07dniH0dlPdzZnIXIAQIYhB1VD2riQR3adFmgM19I0HE2ZZ\nNJAFHkzylQKBgERzchj17dHCJUX1OAc5Hh9AKOuQc6hHSJ39H9Xd2mbh80B2EUGj\ni5Fg0Jx4LGimwcsVRpOpzZJAZ5VSTjsNmKOtqRI/oti0Rj5cb61AsqWgf2NXwqq0\nxKmI9rRZAWzkOPIQ6OukvM0avUcZKkj4wteplK/1bvwlFOuEB2kVsggnAoGAU2Aq\nuwJLOCcRgH8LbZvC5lQS9hZCWIKC51RJLMervRDuSO66CD+OTlRJtuxaRYrpLuMm\n202vQExqRG9CZjUL4zLzw9CXM6aROOsN9XIYYf3/iccu8yo+vHmQhCO1qQH+U+as\n0jjP7PEkdelXOkjDW4hf4BuUap/G7JlwhM585rkCgYEArP/39PnbM7saIUlhzmc3\ncdEGOKCBRq0KXUdPFJubrLqbNQLgI6ytvC50JF5Bf/ws02lb7eBCEkdKQ5SwWvm5\n7CdWo2ftRVWmFtVwaBUpQdWAWujXzQbFZgrshTfnUxsh0vLHJg46UQkHcarAsVVU\nUu8YEU0m6pAMUcqOLLsDQig=\n-----END PRIVATE KEY-----\n",
+  "client_email": "yann-284@corded-photon-419014.iam.gserviceaccount.com",
+  "client_id": "111756050061903741439",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/yann-284%40corded-photon-419014.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
