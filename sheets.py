@@ -2,14 +2,33 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from pprint import pprint
 
-scope = ["https://spreadsheets.google.com/feeds","https://www.googleapis.com/auth/spreadsheets" ,"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+def get_data_from_google_sheets(modules=None, number_of_members=None, credits=None):
 
-creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
+    scope = ["https://spreadsheets.google.com/feeds","https://www.googleapis.com/auth/spreadsheets" ,"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 
-client = gspread.authorize(creds)
+    creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
 
-sheet = client.open("Database").sheet1
+    client = gspread.authorize(creds)
 
-data = sheet.get_all_records()
+    sheet = client.open("Database").sheet1
 
-pprint(data)
+    data = sheet.get_all_records()
+
+    filtered_data = data
+
+    if modules:
+        filtered_data = [record for record in filtered_data if record.get("POINT OF INTERESTS") in modules]
+        
+    if number_of_members:   
+        filtered_data = [record for record in filtered_data if record.get("NUMBER OF MEMBERS") ==  number_of_members]
+        
+    if credits:
+        filtered_data = [record for record in filtered_data if record.get("ACCREDITATION") == credits]   
+
+    return filtered_data
+        
+
+
+    
+
+
