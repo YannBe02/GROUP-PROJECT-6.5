@@ -2,7 +2,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from pprint import pprint
 
-def get_data_from_google_sheets(modules=None, number_of_members=None, credits=None):
+def get_data_from_google_sheets(modules=None, number_of_members=None, credits=None, languages=None):
 
     scope = ["https://spreadsheets.google.com/feeds","https://www.googleapis.com/auth/spreadsheets" ,"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 
@@ -18,14 +18,22 @@ def get_data_from_google_sheets(modules=None, number_of_members=None, credits=No
 
     if modules:
         filtered_data = [record for record in filtered_data if record.get("POINT OF INTERESTS") in modules]
-        
+
     if number_of_members:   
         filtered_data = [record for record in filtered_data if record.get("NUMBER OF MEMBERS") ==  number_of_members]
-        
+    
     if credits:
-        filtered_data = [record for record in filtered_data if record.get("ACCREDITATION") == credits]   
+        filtered_data = [record for record in filtered_data if record.get("ACCREDITATION") == credits]      
+
+    if languages:
+        filtered_data = [record for record in filtered_data if record.get("LANGUAGE(S)") in languages]
 
     return filtered_data
+
+
+
+
+
         
 
 
