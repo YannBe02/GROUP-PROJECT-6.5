@@ -6,7 +6,6 @@ import sheets
 st.set_page_config(page_title="HSG UNICLUBS", page_icon=":computer:")
 
 
-
 st.title('''
          :red[WELCOME TO UNICLUBS]''')
 st.header("""
@@ -34,39 +33,45 @@ for module in selected_modules:
 
 st.subheader("Language(s)")
 languages = [
-    "English",
     "German",
+    "English",
     "French",
-    "Spanish",
     "Italian",
-    "Chinese",
-    "Portuguese",
+    "Spanish",
     "Arabic",
+    "Other",
 ]
+
 
 selected_languages = st.multiselect("Select the language(s) you wish to speak in the club", languages)
 for language in selected_languages:
     st.write(f"You've selected {language}")
+
 
 st.subheader("Number of Members")
 number_of_members = st.radio(
     "Select the number of members",
     ("11-30", "31-50", "51-100", "101 & more")
 )
+
 st.write(f"You've selected {number_of_members} members in the club!")
 
 
 st.subheader("Accreditation")
-st.write("Do you wish to find a club who are giving credit for work?")
+st.write("Do you wish to find a club who are giving credits for work?")
 credits = st.radio(
     "Select:",
     ("Yes", "No")
 )
 st.write(f"You've selected {credits}!")
 
-data = sheets.get_data_from_google_sheets(selected_modules, number_of_members, credits)
+
+st.subheader("Results after taking into account your selection")
 
 
+
+
+data = sheets.get_data_from_google_sheets(selected_modules, number_of_members, credits, selected_languages)
 
 def format_database_record(record):
     st.markdown(f"**Name:** {record['NAME']}")
@@ -81,14 +86,12 @@ def format_database_record(record):
     st.markdown(f"**Number of Members:** {record['NUMBER OF MEMBERS']}")
     st.markdown(f"**Accreditation:** {record['ACCREDITATION']}")
     st.markdown(f"**Point of Interests:** {record['POINT OF INTERESTS']}")
-    st.markdown(f"**Languages:** {record['LANGUAGE(S)']}")
+    st.markdown(f"**Language(s):** {record['LANGUAGE(S)']}")
 
-    st.markdown("---")  # Add a horizontal line between records
+    st.markdown("---")  
 
-# Assume 'data' is a list of records from the database for a specific category
 for record in data:
     format_database_record(record)
-
 
 
 
