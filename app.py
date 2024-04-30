@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import sheets
+from collections import Counter
 
 st.set_page_config(page_title="HSG UNICLUBS", page_icon=":computer:")
 
@@ -51,23 +52,37 @@ for language in selected_languages:
 st.subheader("Number of Members")
 number_of_members = st.radio(
     "Select the number of members",
-    ("11-30", "31-50", "51-100", "101 & more")
+    ("11-30", "31-50", "51-100", "101 & more","No preference")
 )
-
-st.write(f"You've selected {number_of_members} members in the club!")
+if number_of_members=="No preference":
+    number_of_members=None
+    st.write(f"You don't have any preference for the amount of club members")
+else:
+    st.write(f"You've selected {number_of_members} members in the club!")
 
 
 st.subheader("Accreditation")
 st.write("Do you wish to find a club who are giving credits for work?")
 credits = st.radio(
     "Select:",
-    ("Yes", "No")
+    ("Yes", "No", "No preference")
 )
-st.write(f"You've selected {credits}!")
+
+if credits=="No preference":
+    credits=None
+    st.write(f"You don't have any preference")
+else:
+    st.write(f"You've selected {credits}!")
 
 
-st.subheader("Results after taking into account your selection")
+c1, c2 =st.columns([3,1])
+with c1:
+    st.write("")
+with c2:
+    search=st.button("Search") #create a search button to trigger the search
 
+if search:
+    st.subheader("Results after taking into account your selection")
 
 
 
@@ -88,16 +103,83 @@ def format_database_record(record):
     st.markdown(f"**Point of Interests:** {record['POINT OF INTERESTS']}")
     st.markdown(f"**Language(s):** {record['LANGUAGE(S)']}")
 
-    st.markdown("---")  
-
-for record in data:
-    format_database_record(record)
 
 
+# Assume 'data' is a list of records from the database for a specific category
+#Return the information of the selected club with a limit of 5 clubs
+limit=150
+limit=st.slider("Slide to the amount of clubs you want to see, feature only for Lea and Shasha",0,150)
+counter=0
+if search: #only triggers the search if the search button is clicked
+    for record in data:
+        counter+=1
+        format_database_record(record)
+        st.progress(75)
+        st.markdown("---")  # Add a horizontal line between records
+
+        if counter==limit:
+            break 
+
+    #Return information of similar demands if less than 5 clubs correspond to demand
+    #For this part, I could have created a formula which would have made everything easier, but the idea only came up when I had finished coding
+
+    if counter <limit:
+        st.markdown("Sadly, there is no other club which fulfills all your criterias. However, you might be interested by these similar clubs: ") 
+        st.markdown("---")  # Add a horizontal line between records
+        data2=sheets.get_data_from_google_sheets(selected_modules, number_of_members, None, selected_languages)#same requests but no regards to accreditation
+        
+        datax2=data+data2 #all data 2 elements are already in data, but some more too, add them together and only select the ones which are unique
+        club_countsx2 = Counter([club["NAME"] for club in datax2])
+        unique_data_list = [club for club in datax2 if club_countsx2[club["NAME"]] == 1]
+
+        for record in unique_data_list:
+            counter+=1
+            format_database_record(record) #return the list of club infos
+            st.markdown("---")  # Add a horizontal line between records
+            if counter==limit:
+                break
+
+    if counter<limit: #same requests but no regards to members and accreditation
+        data3=sheets.get_data_from_google_sheets(selected_modules, None, None, selected_languages) 
+        datax3=data2+data3
+        club_countsx3= Counter([club["NAME"] for club in datax3])
+        uniquex3=[club for club in datax3 if club_countsx3[club["NAME"]] == 1]
+        for record in uniquex3:
+            counter+=1
+            format_database_record(record) #return the list of club infos
+            st.markdown("---")  # Add a horizontal line between records
+            if counter==limit:
+                break
+
+    if counter<limit: #request with no preference for credits and languages, but request for number of members
+        data4=sheets.get_data_from_google_sheets(selected_modules, number_of_members, None, None)
+        datax4=data2+data3+data4
+        club_counts4= Counter([club["NAME"] for club in datax4])
+        uniquex4=[club for club in datax4 if club_countsx4[club["NAME"]] == 1]
+        for record in uniquex4:
+            counter+=1
+            format_database_record(record) #return the list of club infos
+            st.markdown("---")  # Add a horizontal line between records
+            if counter==limit:
+                break
+
+    if counter<limit: #request with no preferences for credits, languages and number of members, last research, after that no more answers
+        data5=sheets.get_data_from_google_sheets(selected_modules, None, None, None) 
+        datax5=datax4+data5
+        club_countsx5= Counter([club["NAME"] for club in datax5])
+        uniquex5=[club for club in datax5 if club_countsx5[club["NAME"]] == 1]
+        for record in uniquex5:
+            counter+=1
+            format_database_record(record)#return the list of club infos
+            st.markdown("---")  # Add a horizontal line between records
+            if counter==limit:
+                break
+
+    if counter<limit: #return a text if no more club more or less fulfils your criterias, this should not be possible in theory if limit is set at 5
+        st.write("There is no other club which more or less fulfils your criterias")
 
 
-
-
+st.markdown("---")  # Add a horizontal line between records
 st.subheader("Who are we?")
 if st.button("Team"):
     st.write("We are Group 6.5!")
@@ -113,4 +195,3 @@ if st.button("Team"):
             
              """)
     
-
