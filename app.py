@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import sheets
+import plotly.graph_objects as go
+
 from collections import Counter
 
 st.set_page_config(page_title="HSG UNICLUBS", page_icon=":computer:")
@@ -106,17 +108,26 @@ def format_database_record(record):
 
 
 # Assume 'data' is a list of records from the database for a specific category
-#Return the information of the selected club with a limit of 5 clubs
-limit = 5
+#Return the information of the selected club with a limit of 10 clubs
+limit = 10
 
-counter=0 #creation of a counter to limit the amount of findings to the 'limit', which is set at 5
+counter=0 #creation of a counter to limit the amount of findings to the 'limit', which is set at 10
 if search: #only triggers the search if the search button is clicked
     for record in data:
         counter+=1
         format_database_record(record) #use of created formula to deploy the data in a visually nice way
-        st.write('')
-        st.write('Search is 100% accurate')#Visualisation of accuracy of findings with a text and a bar
-        st.progress(100)
+        fig = go.Figure(go.Indicator(mode = "gauge+number",
+        value = 100,
+        domain = {'x': [0, 1], 'y': [0, 1]},
+        title = {'text': 'Compatibility to criterias'},
+        gauge = {
+            'axis': {'range':[0, 100]},
+            'bar': {'color':"#45d01b"},
+            'steps' : [
+                {'range':[0, 50], 'color':"gray"},
+                {'range':[50, 100], 'color':"lightgray"}]}))
+        st.plotly_chart(fig)
+        st.write('Your search is 100% accurate')#Visualisation of accuracy of findings with a text and a bar
         st.markdown("---")  # Add a horizontal line between records to add readability
 
         if counter==limit:
@@ -137,9 +148,18 @@ if search: #only triggers the search if the search button is clicked
         for record in unique_data_list:
             counter+=1 #increase the counter to approach limit
             format_database_record(record) #return the list of club infos
-            st.write('')
-            st.write('Search is 92% accurate, The accreditation does not match')#Visualisation of accuracy of findings with a text and a bar
-            st.progress(92)
+            fig = go.Figure(go.Indicator(mode = "gauge+number",
+            value = 92,
+            domain = {'x': [0, 1], 'y': [0, 1]},
+            title = {'text': 'Compatibility to criterias'},
+            gauge = {
+            'axis': {'range':[0, 100]},
+            'bar': {'color':'#8fb200'},
+            'steps' : [
+                {'range':[0, 50], 'color':"gray"},
+                {'range':[50, 100], 'color':"lightgray"}]}))
+            st.plotly_chart(fig)
+            st.write('Search is 92% accurate, only the accreditation does not match')#Visualisation of accuracy of findings with a text and a bar
             st.markdown("---")  # Add a horizontal line between records
             if counter==limit: #if counter is at limit, no more iteration shall be made
                 break
@@ -152,9 +172,18 @@ if search: #only triggers the search if the search button is clicked
         for record in uniquex3:
             counter+=1
             format_database_record(record) #return the list of club infos
-            st.write('')
+            fig = go.Figure(go.Indicator(mode = "gauge+number",
+            value = 78,
+            domain = {'x': [0, 1], 'y': [0, 1]},
+            title = {'text': 'Compatibility to criterias'},
+            gauge = {
+            'axis': {'range':[0, 100]},
+            'bar': {'color':'#ba8f00'},
+            'steps' : [
+                {'range':[0, 50], 'color':"gray"},
+                {'range':[50, 100], 'color':"lightgray"}]}))
+            st.plotly_chart(fig)
             st.write('Search is 78% accurate, the accreditation and the number of participants do not match')#Visualisation of accuracy of findings with a text and a bar
-            st.progress(78)
             st.markdown("---")  # Add a horizontal line between records
             if counter==limit:
                 break
@@ -167,9 +196,18 @@ if search: #only triggers the search if the search button is clicked
         for record in uniquex4:
             counter+=1
             format_database_record(record) #return the list of club infos
-            st.write('')
+            fig = go.Figure(go.Indicator(mode = "gauge+number",
+            value = 63,
+            domain = {'x': [0, 1], 'y': [0, 1]},
+            title = {'text': 'Compatibility to criterias'},
+            gauge = {
+            'axis': {'range':[0, 100]},
+            'bar': {'color':'#ba8f00'},
+            'steps' : [
+                {'range':[0, 50], 'color':"gray"},
+                {'range':[50, 100], 'color':"lightgray"}]}))
+            st.plotly_chart(fig)
             st.write('Search is 63% accurate, the accreditation and the language requested do not match')#Visualisation of accuracy of findings with a text and a bar
-            st.progress(63)
             st.markdown("---")  # Add a horizontal line between records
             if counter==limit:
                 break
@@ -182,9 +220,18 @@ if search: #only triggers the search if the search button is clicked
         for record in uniquex5:
             counter+=1
             format_database_record(record)#return the list of club infos
-            st.write('')
+            fig = go.Figure(go.Indicator(mode = "gauge+number",
+            value = 50,
+            domain = {'x': [0, 1], 'y': [0, 1]},
+            title = {'text': 'Compatibility to criterias'},
+            gauge = {
+            'axis': {'range':[0, 100]},
+            'bar': {'color':'#e51f1f'},
+            'steps' : [
+                {'range':[0, 50], 'color':"gray"},
+                {'range':[50, 100], 'color':"lightgray"}]}))
+            st.plotly_chart(fig)
             st.write('Search is 50% accurate, only the point of interest is matching') #Visualisation of accuracy of findings with a text and a bar
-            st.progress(50)
             st.markdown("---")  # Add a horizontal line between records
             if counter==limit:
                 break
