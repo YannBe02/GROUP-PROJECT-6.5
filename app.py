@@ -107,15 +107,17 @@ def format_database_record(record):
 
 # Assume 'data' is a list of records from the database for a specific category
 #Return the information of the selected club with a limit of 5 clubs
-limit=150
-limit=st.slider("Slide to the amount of clubs you want to see, feature only for Lea and Shasha",0,150)
-counter=0
+limit = 5
+
+counter=0 #creation of a counter to limit the amount of findings to the 'limit', which is set at 5
 if search: #only triggers the search if the search button is clicked
     for record in data:
         counter+=1
-        format_database_record(record)
-        st.progress(75)
-        st.markdown("---")  # Add a horizontal line between records
+        format_database_record(record) #use of created formula to deploy the data in a visually nice way
+        st.write('')
+        st.write('Search is 100% accurate')#Visualisation of accuracy of findings with a text and a bar
+        st.progress(100)
+        st.markdown("---")  # Add a horizontal line between records to add readability
 
         if counter==limit:
             break 
@@ -129,48 +131,60 @@ if search: #only triggers the search if the search button is clicked
         data2=sheets.get_data_from_google_sheets(selected_modules, number_of_members, None, selected_languages)#same requests but no regards to accreditation
         
         datax2=data+data2 #all data 2 elements are already in data, but some more too, add them together and only select the ones which are unique
-        club_countsx2 = Counter([club["NAME"] for club in datax2])
-        unique_data_list = [club for club in datax2 if club_countsx2[club["NAME"]] == 1]
+        club_countsx2 = Counter([club["NAME"] for club in datax2]) #to see which clubs are unique, count the amount of time a club appears in datax2
+        unique_data_list = [club for club in datax2 if club_countsx2[club["NAME"]] == 1] #only select the unique clubs which appear only once in club_countsx2
 
         for record in unique_data_list:
-            counter+=1
+            counter+=1 #increase the counter to approach limit
             format_database_record(record) #return the list of club infos
+            st.write('')
+            st.write('Search is 92% accurate, The accreditation does not match')#Visualisation of accuracy of findings with a text and a bar
+            st.progress(92)
             st.markdown("---")  # Add a horizontal line between records
-            if counter==limit:
+            if counter==limit: #if counter is at limit, no more iteration shall be made
                 break
 
-    if counter<limit: #same requests but no regards to members and accreditation
-        data3=sheets.get_data_from_google_sheets(selected_modules, None, None, selected_languages) 
+    if counter<limit: #if the counter still has not attained the limit, go on with a broader search
+        data3=sheets.get_data_from_google_sheets(selected_modules, None, None, selected_languages) #same requests but no regards to members and accreditation
         datax3=data2+data3
         club_countsx3= Counter([club["NAME"] for club in datax3])
         uniquex3=[club for club in datax3 if club_countsx3[club["NAME"]] == 1]
         for record in uniquex3:
             counter+=1
             format_database_record(record) #return the list of club infos
+            st.write('')
+            st.write('Search is 78% accurate, the accreditation and the number of participants do not match')#Visualisation of accuracy of findings with a text and a bar
+            st.progress(78)
             st.markdown("---")  # Add a horizontal line between records
             if counter==limit:
                 break
 
-    if counter<limit: #request with no preference for credits and languages, but request for number of members
-        data4=sheets.get_data_from_google_sheets(selected_modules, number_of_members, None, None)
+    if counter<limit: #if the counter still has not attained the limit, go on with a broader search
+        data4=sheets.get_data_from_google_sheets(selected_modules, number_of_members, None, None)#request with no preference for credits and languages, but request for number of members
         datax4=data2+data3+data4
-        club_counts4= Counter([club["NAME"] for club in datax4])
+        club_countsx4= Counter([club["NAME"] for club in datax4])
         uniquex4=[club for club in datax4 if club_countsx4[club["NAME"]] == 1]
         for record in uniquex4:
             counter+=1
             format_database_record(record) #return the list of club infos
+            st.write('')
+            st.write('Search is 63% accurate, the accreditation and the language requested do not match')#Visualisation of accuracy of findings with a text and a bar
+            st.progress(63)
             st.markdown("---")  # Add a horizontal line between records
             if counter==limit:
                 break
 
-    if counter<limit: #request with no preferences for credits, languages and number of members, last research, after that no more answers
-        data5=sheets.get_data_from_google_sheets(selected_modules, None, None, None) 
+    if counter<limit: #if the counter still has not attained the limit, go on with a broader search
+        data5=sheets.get_data_from_google_sheets(selected_modules, None, None, None) #request with no preferences for credits, languages and number of members, last research, after that no more answers
         datax5=datax4+data5
         club_countsx5= Counter([club["NAME"] for club in datax5])
         uniquex5=[club for club in datax5 if club_countsx5[club["NAME"]] == 1]
         for record in uniquex5:
             counter+=1
             format_database_record(record)#return the list of club infos
+            st.write('')
+            st.write('Search is 50% accurate, only the point of interest is matching') #Visualisation of accuracy of findings with a text and a bar
+            st.progress(50)
             st.markdown("---")  # Add a horizontal line between records
             if counter==limit:
                 break
@@ -195,3 +209,5 @@ if st.button("Team"):
             
              """)
     
+# if st.button("Easter Egg"):
+#     limit=st.slider("Slide to the amount of clubs you want to see, feature only for Lea and Shasha",0,150)
