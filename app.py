@@ -93,18 +93,18 @@ data = sheets.get_data_from_google_sheets(selected_modules, number_of_members, c
                   
 #the following block of code allows to have a nice format of the responses given with the informations of the corresponding clubs according to the choices made by the user
 def format_database_record(record):
-    st.markdown(f"<h2>NAME:</h2> {record['NAME']}", unsafe_allow_html=True)
-    st.markdown(f"<h3>Description:</h3> {record['DESCRIPTION']}", unsafe_allow_html=True)
-    st.markdown(f"<h3>Point of Interests:</h3> {record['POINT OF INTERESTS']}", unsafe_allow_html=True)
-    st.markdown(f"<h3>Language(s):</h3> {record['LANGUAGE(S)']}", unsafe_allow_html=True)
-    st.markdown(f"<h3>Number of Members:</h3> {record['NUMBER OF MEMBERS']}", unsafe_allow_html=True)
-    st.markdown(f"<h3>Accreditation:</h3> {record['ACCREDITATION']}", unsafe_allow_html=True)
-    st.markdown(f"<h3>Recruitment:</h3> {record['RECRUITMENT']}", unsafe_allow_html=True)
-    st.markdown(f"<h3>Instagram:</h3> {record['INSTAGRAM']}", unsafe_allow_html=True)
-    st.markdown(f"<h3>Facebook:</h3> {record['FACEBOOK']}", unsafe_allow_html=True)
-    st.markdown(f"<h3>LinkedIn:</h3> {record['LINKEDIN']}", unsafe_allow_html=True)
-    st.markdown(f"<h3>Website:</h3> {record['WEBSITE']}", unsafe_allow_html=True)
-    st.markdown(f"<h3>Email:</h3> {record['EMAIL']}", unsafe_allow_html=True)
+    st.markdown(f"<h5>Name:</h5> <b>{record['NAME']}</h5>", unsafe_allow_html=True)
+    st.markdown("<h5>"f"<h5>Description:</h5> {record['DESCRIPTION']}</h5>", unsafe_allow_html=True)
+    st.markdown("<h5>"f"<h5>Point of Interests:</h5> {record['POINT OF INTERESTS']}</h5>", unsafe_allow_html=True)
+    st.markdown("<h5>"f"<h5>Language(s):</h5> {record['LANGUAGE(S)']}</h5>", unsafe_allow_html=True)
+    st.markdown("<h5>"f"<h5>Number of Members:</h5> {record['NUMBER OF MEMBERS']}</h5>", unsafe_allow_html=True)
+    st.markdown("<h5>"f"<h5>Accreditation:</h5> {record['ACCREDITATION']}</h5>", unsafe_allow_html=True)
+    st.markdown("<h5>"f"<h5>Recruitment:</h5> {record['RECRUITMENT']}</h5>", unsafe_allow_html=True)
+    st.markdown("<h5>"f"<h5>Instagram:</h5> {record['INSTAGRAM']}</h5>", unsafe_allow_html=True)
+    st.markdown("<h5>"f"<h5>Facebook:</h5> {record['FACEBOOK']}</h5>", unsafe_allow_html=True)
+    st.markdown("<h5>"f"<h5>LinkedIn:</h5> {record['LINKEDIN']}</h5>", unsafe_allow_html=True)
+    st.markdown("<h5>"f"<h5>Website:</h5> {record['WEBSITE']}</h5>", unsafe_allow_html=True)
+    st.markdown("<h5>"f"<h5>Email:</h5> {record['EMAIL']}</h5>", unsafe_allow_html=True)
 
     
 
