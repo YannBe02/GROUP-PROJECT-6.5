@@ -12,5 +12,4 @@
   "universe_domain": "googleapis.com"
 }
 
-#This document is there to link the Google Drive/Sheets API with our current database. We had to create credentials which have created an email (see client_email on line 6)
-#It also gives authorization to have access to the database available on Google Sheets
+
