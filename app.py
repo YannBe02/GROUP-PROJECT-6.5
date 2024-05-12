@@ -84,27 +84,29 @@ with c2:
     search=st.button("Search") #create a search button to trigger the search
 
 if search:
-    st.subheader("Results after taking into account your selection")
-
+    st.subheader('''
+    :red[Results after taking into account your selection]
+    ''')
 
 
 data = sheets.get_data_from_google_sheets(selected_modules, number_of_members, credits, selected_languages)    #link with the database which is also connected to Google Drive and Google Sheets API
                   
 #the following block of code allows to have a nice format of the responses given with the informations of the corresponding clubs according to the choices made by the user
 def format_database_record(record):
-    st.markdown(f"**Name:** {record['NAME']}")
-    st.markdown(f"**Description:** {record['DESCRIPTION']}")
-    st.markdown(f"**Category:** {record['CATEGORY']}")
-    st.markdown(f"**Instagram:** [{record['INSTAGRAM']}]({record['INSTAGRAM']})")
-    st.markdown(f"**Facebook:** [{record['FACEBOOK']}]({record['FACEBOOK']})")
-    st.markdown(f"**LinkedIn:** [{record['LINKEDIN']}]({record['LINKEDIN']})")
-    st.markdown(f"**Website:** [{record['WEBSITE']}]({record['WEBSITE']})")
-    st.markdown(f"**Email:** {record['EMAIL']}")
-    st.markdown(f"**Is Recruiting:** {record['IS RECRUITING']}")
-    st.markdown(f"**Number of Members:** {record['NUMBER OF MEMBERS']}")
-    st.markdown(f"**Accreditation:** {record['ACCREDITATION']}")
-    st.markdown(f"**Point of Interests:** {record['POINT OF INTERESTS']}")
-    st.markdown(f"**Language(s):** {record['LANGUAGE(S)']}")
+    st.markdown(f"<h2>NAME:</h2> {record['NAME']}", unsafe_allow_html=True)
+    st.markdown(f"<h3>Description:</h3> {record['DESCRIPTION']}", unsafe_allow_html=True)
+    st.markdown(f"<h3>Point of Interests:</h3> {record['POINT OF INTERESTS']}", unsafe_allow_html=True)
+    st.markdown(f"<h3>Language(s):</h3> {record['LANGUAGE(S)']}", unsafe_allow_html=True)
+    st.markdown(f"<h3>Number of Members:</h3> {record['NUMBER OF MEMBERS']}", unsafe_allow_html=True)
+    st.markdown(f"<h3>Accreditation:</h3> {record['ACCREDITATION']}", unsafe_allow_html=True)
+    st.markdown(f"<h3>Recruitment:</h3> {record['RECRUITMENT']}", unsafe_allow_html=True)
+    st.markdown(f"<h3>Instagram:</h3> {record['INSTAGRAM']}", unsafe_allow_html=True)
+    st.markdown(f"<h3>Facebook:</h3> {record['FACEBOOK']}", unsafe_allow_html=True)
+    st.markdown(f"<h3>LinkedIn:</h3> {record['LINKEDIN']}", unsafe_allow_html=True)
+    st.markdown(f"<h3>Website:</h3> {record['WEBSITE']}", unsafe_allow_html=True)
+    st.markdown(f"<h3>Email:</h3> {record['EMAIL']}", unsafe_allow_html=True)
+
+    
 
 
 
