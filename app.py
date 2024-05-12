@@ -93,7 +93,7 @@ data = sheets.get_data_from_google_sheets(selected_modules, number_of_members, c
                   
 #the following block of code allows to have a nice format of the responses given with the informations of the corresponding clubs according to the choices made by the user
 def format_database_record(record):
-    st.markdown(f"<h5>Name:</h5> <b>{record['NAME']}</h5>", unsafe_allow_html=True)
+    st.markdown(f"<h5>Name:</h5> <h6><b>{record['NAME']}</h5>", unsafe_allow_html=True)
     st.markdown("<h5>"f"<h5>Description:</h5> {record['DESCRIPTION']}</h5>", unsafe_allow_html=True)
     st.markdown("<h5>"f"<h5>Point of Interests:</h5> {record['POINT OF INTERESTS']}</h5>", unsafe_allow_html=True)
     st.markdown("<h5>"f"<h5>Language(s):</h5> {record['LANGUAGE(S)']}</h5>", unsafe_allow_html=True)
