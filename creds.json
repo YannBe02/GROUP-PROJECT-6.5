@@ -11,3 +11,6 @@
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/yann-284%40corded-photon-419014.iam.gserviceaccount.com",
   "universe_domain": "googleapis.com"
 }
+
+#This document is there to link the Google Drive/Sheets API with our current database. We had to create credentials which have created an email (see client_email on line 6)
+#It also gives authorization to have access to the database available on Google Sheets
