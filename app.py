@@ -1,22 +1,22 @@
-import streamlit as st 
-import pandas as pd
-import numpy as np
-import sheets
-import plotly.graph_objects as go
+import streamlit as st #importation of streamlit to have an access to a localhost
+import pandas as pd #importation of pandas
+import numpy as np #importation of numpy
+import sheets #importation of sheets to have a link with sheets.py and to have a working API
+import plotly.graph_objects as go #import to have a gauge bar
 
 from collections import Counter
 
-st.set_page_config(page_title="HSG UNICLUBS", page_icon=":computer:")
+st.set_page_config(page_title="HSG UNICLUBS", page_icon=":computer:") #Title appearing on the research bar of the research motor
 
 
 st.title('''
-         :red[WELCOME TO UNICLUBS]''')
+         :red[WELCOME TO UNICLUBS]''')         #code to have a visible Title on the website
 st.header("""
-We designed this website to help you finding the best club corresponding to your criteria
-""")
+We designed this website to help you finding the best club corresponding to your criteria         
+""")         #explanation of the goal of the website so that the users can understand what is the aim of the website
 
 
-st.subheader("Point of Interests")   
+st.subheader("Point of Interests")           #First selection for the user: one can choose what he is interested in between many point of interests
 modules = [
     "AV",
     "Networking and Think Tanks",
@@ -29,12 +29,12 @@ modules = [
     "Cantons",
     "Industry Focus",
 ]
-selected_modules = st.multiselect("Select the topics you're interested in:", modules)
+selected_modules = st.multiselect("Select the topics you're interested in:", modules)  #once the user selected what he is interested in, the website shows what has been selected thanks to this code
 for module in selected_modules:
     st.write(f"📘 {module}")
     
 
-st.subheader("Language(s)")
+st.subheader("Language(s)")         #Second selection for the user: one can change which language(s) he wishes to speak with the club
 languages = [
     "German",
     "English",
@@ -46,38 +46,38 @@ languages = [
 ]
 
 
-selected_languages = st.multiselect("Select the language(s) you wish to speak in the club", languages)
+selected_languages = st.multiselect("Select the language(s) you wish to speak in the club", languages) #this code shows what has been selected by the user
 for language in selected_languages:
     st.write(f"You've selected {language}")
 
 
-st.subheader("Number of Members")
+st.subheader("Number of Members") #Third selection for the user: one can choose how many members he wishes to have in his corresponding club
 number_of_members = st.radio(
     "Select the number of members",
     ("11-30", "31-50", "51-100", "101 & more","No preference")
 )
-if number_of_members=="No preference":
+if number_of_members=="No preference":           #block of code to give different responses depending on the choice of the user concerning the number of members selected above
     number_of_members=None
     st.write(f"You don't have any preference for the amount of club members")
 else:
     st.write(f"You've selected {number_of_members} members in the club!")
 
 
-st.subheader("Accreditation")
+st.subheader("Accreditation")         #Fourth selection for the user: one can choose if he wishes to get credits when being in the board of the club
 st.write("Do you wish to find a club who are giving credits for work?")
 credits = st.radio(
     "Select:",
     ("Yes", "No", "No preference")
 )
 
-if credits=="No preference":
+if credits=="No preference":  #block of code to give different responses depending on the choice of the user concerning the accreditation selected above
     credits=None
     st.write(f"You don't have any preference")
 else:
     st.write(f"You've selected {credits}!")
 
 
-c1, c2 =st.columns([3,1])
+c1, c2 =st.columns([3,1])                  #implementation of the search button to trigger the research and to position it on the right side of the page
 with c1:
     st.write("")
 with c2:
@@ -88,8 +88,9 @@ if search:
 
 
 
-data = sheets.get_data_from_google_sheets(selected_modules, number_of_members, credits, selected_languages)
-
+data = sheets.get_data_from_google_sheets(selected_modules, number_of_members, credits, selected_languages)    #link with the database which is also connected to Google Drive and Google Sheets API
+                  
+#the following block of code allows to have a nice format of the responses given with the informations of the corresponding clubs according to the choices made by the user
 def format_database_record(record):
     st.markdown(f"**Name:** {record['NAME']}")
     st.markdown(f"**Description:** {record['DESCRIPTION']}")
@@ -241,7 +242,7 @@ if search: #only triggers the search if the search button is clicked
 
 
 st.markdown("---")  # Add a horizontal line between records
-st.subheader("Who are we?")
+st.subheader("Who are we?") #adding of a button to get information on the team which created this website
 if st.button("Team"):
     st.write("We are Group 6.5!")
     st.write("""
