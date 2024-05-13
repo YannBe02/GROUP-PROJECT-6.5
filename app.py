@@ -258,6 +258,4 @@ if st.button("Team"):
              Yann Bernasconi
             
              """)
-    
-# if st.button("Easter Egg"):
-#     limit=st.slider("Slide to the amount of clubs you want to see, feature only for Lea and Shasha",0,150)
+
