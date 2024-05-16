@@ -56,7 +56,7 @@ number_of_members = st.radio(
     "Select the number of members",
     ("11-30", "31-50", "51-100", "101 & more","No preference")
 )
-if number_of_members=="No preference":           #block of code to give different responses depending on the choice of the user concerning the number of members selected above
+if number_of_members=="No preference":           #block of code to give different responses depending on the choice of the user concerning the number of members selected above, addition of possibility of having no preference
     number_of_members=None
     st.write(f"You don't have any preference for the amount of club members")
 else:
@@ -70,20 +70,20 @@ credits = st.radio(
     ("Yes", "No", "No preference")
 )
 
-if credits=="No preference":  #block of code to give different responses depending on the choice of the user concerning the accreditation selected above
+if credits=="No preference":  #block of code to give different responses depending on the choice of the user concerning the accreditation selected above, addition of possibility of having no preference
     credits=None
     st.write(f"You don't have any preference")
 else:
     st.write(f"You've selected {credits}!")
 
 
-c1, c2 =st.columns([3,1])                  #implementation of the search button to trigger the research and to position it on the right side of the page
+c1, c2 =st.columns([3,1])                  #implementation of the search button to trigger the research and use of collumns to position it on the right side of the page
 with c1:
     st.write("")
 with c2:
     search=st.button("Search") #create a search button to trigger the search
 
-if search:
+if search: #Button to initiate search with a text
     st.subheader('''
     :red[Results after taking into account your selection]
     ''')
@@ -117,15 +117,15 @@ limit = 10
 counter=0 #creation of a counter to limit the amount of findings to the 'limit', which is set at 10
 if search: #only triggers the search if the search button is clicked
     for record in data:
-        counter+=1
+        counter+=1 #increase the counter by one
         format_database_record(record) #use of created formula to deploy the data in a visually nice way
-        fig = go.Figure(go.Indicator(mode = "gauge+number",
+        fig = go.Figure(go.Indicator(mode = "gauge+number",#creation of gauge bar of a 100%
         value = 100,
         domain = {'x': [0, 1], 'y': [0, 1]},
         title = {'text': 'Compatibility to criterias'},
         gauge = {
             'axis': {'range':[0, 100]},
-            'bar': {'color':"#45d01b"},
+            'bar': {'color':"#45d01b"},          #for the colors, I used an online gradient creator from green to red and used the hexadecimal codes accordingly
             'steps' : [
                 {'range':[0, 50], 'color':"gray"},
                 {'range':[50, 100], 'color':"lightgray"}]}))
@@ -133,25 +133,26 @@ if search: #only triggers the search if the search button is clicked
         st.write('Your search is 100% accurate')#Visualisation of accuracy of findings with a text and a bar
         st.markdown("---")  # Add a horizontal line between records to add readability
 
-        if counter==limit:
+        if counter==limit: #stops the search once the limit is reached
             break 
 
-    #Return information of similar demands if less than 5 clubs correspond to demand
-    #For this part, I could have created a formula which would have made everything easier, but the idea only came up when I had finished coding
+    #Return information of similar demands if less than 10 clubs correspond to demand
+    #For this part, I could have created a formula which would have made everything easier, but the idea only came up when I had finished coding, the same occured with the gauge bars
+    #As the code is (pretty much) the same for each additional search with other criterias, I clearly annoted the first block. The other blocks shall be understood similarly
 
-    if counter <limit:
+    if counter <limit: #Continue only if limit is not reached
         st.markdown("Sadly, there is no other club which fulfills all your criterias. However, you might be interested by these similar clubs: ") 
         st.markdown("---")  # Add a horizontal line between records
         data2=sheets.get_data_from_google_sheets(selected_modules, number_of_members, None, selected_languages)#same requests but no regards to accreditation
         
-        datax2=data+data2 #all data 2 elements are already in data, but some more too, add them together and only select the ones which are unique
+        datax2=data+data2                   #all data2 elements are already in data, but some more too, add them together and only select the ones which are unique
         club_countsx2 = Counter([club["NAME"] for club in datax2]) #to see which clubs are unique, count the amount of time a club appears in datax2
         unique_data_list = [club for club in datax2 if club_countsx2[club["NAME"]] == 1] #only select the unique clubs which appear only once in club_countsx2
 
-        for record in unique_data_list:
+        for record in unique_data_list: #iteration for each finding in datax2
             counter+=1 #increase the counter to approach limit
             format_database_record(record) #return the list of club infos
-            fig = go.Figure(go.Indicator(mode = "gauge+number",
+            fig = go.Figure(go.Indicator(mode = "gauge+number", #creation of a gauge to add visualisation
             value = 92,
             domain = {'x': [0, 1], 'y': [0, 1]},
             title = {'text': 'Compatibility to criterias'},
@@ -169,13 +170,13 @@ if search: #only triggers the search if the search button is clicked
 
     if counter<limit: #if the counter still has not attained the limit, go on with a broader search
         data3=sheets.get_data_from_google_sheets(selected_modules, None, None, selected_languages) #same requests but no regards to members and accreditation
-        datax3=data2+data3
+        datax3=data2+data3          #same method than for datax2
         club_countsx3= Counter([club["NAME"] for club in datax3])
         uniquex3=[club for club in datax3 if club_countsx3[club["NAME"]] == 1]
         for record in uniquex3:
             counter+=1
             format_database_record(record) #return the list of club infos
-            fig = go.Figure(go.Indicator(mode = "gauge+number",
+            fig = go.Figure(go.Indicator(mode = "gauge+number",         #creation of a gauge to add visualisation
             value = 78,
             domain = {'x': [0, 1], 'y': [0, 1]},
             title = {'text': 'Compatibility to criterias'},
@@ -199,7 +200,7 @@ if search: #only triggers the search if the search button is clicked
         for record in uniquex4:
             counter+=1
             format_database_record(record) #return the list of club infos
-            fig = go.Figure(go.Indicator(mode = "gauge+number",
+            fig = go.Figure(go.Indicator(mode = "gauge+number",          #creation of a gauge to add visualisation
             value = 63,
             domain = {'x': [0, 1], 'y': [0, 1]},
             title = {'text': 'Compatibility to criterias'},
@@ -229,7 +230,7 @@ if search: #only triggers the search if the search button is clicked
             title = {'text': 'Compatibility to criterias'},
             gauge = {
             'axis': {'range':[0, 100]},
-            'bar': {'color':'#e51f1f'},
+            'bar': {'color':'#e51f1f'},          #for the colors, I used an online gradient creator from green to red and used the hexadecimal codes accordingly
             'steps' : [
                 {'range':[0, 50], 'color':"gray"},
                 {'range':[50, 100], 'color':"lightgray"}]}))
