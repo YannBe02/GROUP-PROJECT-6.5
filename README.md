@@ -3,4 +3,4 @@ Please do in the terminal:
   pip install streamlit
   pip install gspread
   pip install oauth2client
-  pip install plotlyb
+  pip install plotly
