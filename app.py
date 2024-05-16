@@ -119,21 +119,21 @@ if search: #only triggers the search if the search button is clicked
     for record in data:
         counter+=1 #increase the counter by one
         format_database_record(record) #use of created formula to deploy the data in a visually nice way
-        fig = go.Figure(go.Indicator(mode = "gauge+number",#creation of gauge bar of a 100%
+        fig = go.Figure(go.Indicator(mode = "gauge+number",     #creation of gauge bar of a 100%
         value = 100,
         domain = {'x': [0, 1], 'y': [0, 1]},
         title = {'text': 'Compatibility to criterias'},
         gauge = {
             'axis': {'range':[0, 100]},
-            'bar': {'color':"#45d01b"},          #for the colors, I used an online gradient creator from green to red and used the hexadecimal codes accordingly
+            'bar': {'color':"#45d01b"},                 #for the colors, I used an online gradient creator from green to red and used the hexadecimal codes accordingly
             'steps' : [
                 {'range':[0, 50], 'color':"gray"},
                 {'range':[50, 100], 'color':"lightgray"}]}))
         st.plotly_chart(fig)
-        st.write('Your search is 100% accurate')#Visualisation of accuracy of findings with a text and a bar
-        st.markdown("---")  # Add a horizontal line between records to add readability
+        st.write('Your search is 100% accurate')        #Visualisation of accuracy of findings with a text and a bar
+        st.markdown("---")          # Add a horizontal line between records to add readability
 
-        if counter==limit: #stops the search once the limit is reached
+        if counter==limit:      #stops the search once the limit is reached
             break 
 
     #Return information of similar demands if less than 10 clubs correspond to demand
@@ -143,7 +143,7 @@ if search: #only triggers the search if the search button is clicked
     if counter <limit: #Continue only if limit is not reached
         st.markdown("Sadly, there is no other club which fulfills all your criterias. However, you might be interested by these similar clubs: ") 
         st.markdown("---")  # Add a horizontal line between records
-        data2=sheets.get_data_from_google_sheets(selected_modules, number_of_members, None, selected_languages)#same requests but no regards to accreditation
+        data2=sheets.get_data_from_google_sheets(selected_modules, number_of_members, None, selected_languages)     #same requests but no regards to accreditation
         
         datax2=data+data2                   #all data2 elements are already in data, but some more too, add them together and only select the ones which are unique
         club_countsx2 = Counter([club["NAME"] for club in datax2]) #to see which clubs are unique, count the amount of time a club appears in datax2
@@ -163,9 +163,9 @@ if search: #only triggers the search if the search button is clicked
                 {'range':[0, 50], 'color':"gray"},
                 {'range':[50, 100], 'color':"lightgray"}]}))
             st.plotly_chart(fig)
-            st.write('Search is 92% accurate, only the accreditation does not match')#Visualisation of accuracy of findings with a text and a bar
+            st.write('Search is 92% accurate, only the accreditation does not match')       #Visualisation of accuracy of findings with a text and a bar
             st.markdown("---")  # Add a horizontal line between records
-            if counter==limit: #if counter is at limit, no more iteration shall be made
+            if counter==limit:  #if counter is at limit, no more iteration shall be made
                 break
 
     if counter<limit: #if the counter still has not attained the limit, go on with a broader search
@@ -187,13 +187,13 @@ if search: #only triggers the search if the search button is clicked
                 {'range':[0, 50], 'color':"gray"},
                 {'range':[50, 100], 'color':"lightgray"}]}))
             st.plotly_chart(fig)
-            st.write('Search is 78% accurate, the accreditation and the number of participants do not match')#Visualisation of accuracy of findings with a text and a bar
-            st.markdown("---")  # Add a horizontal line between records
+            st.write('Search is 78% accurate, the accreditation and the number of participants do not match')   #Visualisation of accuracy of findings with a text and a bar
+            st.markdown("---")      # Add a horizontal line between records
             if counter==limit:
                 break
 
-    if counter<limit: #if the counter still has not attained the limit, go on with a broader search
-        data4=sheets.get_data_from_google_sheets(selected_modules, number_of_members, None, None)#request with no preference for credits and languages, but request for number of members
+    if counter<limit:   #if the counter still has not attained the limit, go on with a broader search
+        data4=sheets.get_data_from_google_sheets(selected_modules, number_of_members, None, None)   #request with no preference for credits and languages, but request for number of members
         datax4=data2+data3+data4
         club_countsx4= Counter([club["NAME"] for club in datax4])
         uniquex4=[club for club in datax4 if club_countsx4[club["NAME"]] == 1]
@@ -211,7 +211,7 @@ if search: #only triggers the search if the search button is clicked
                 {'range':[0, 50], 'color':"gray"},
                 {'range':[50, 100], 'color':"lightgray"}]}))
             st.plotly_chart(fig)
-            st.write('Search is 63% accurate, the accreditation and the language requested do not match')#Visualisation of accuracy of findings with a text and a bar
+            st.write('Search is 63% accurate, the accreditation and the language requested do not match')       #Visualisation of accuracy of findings with a text and a bar
             st.markdown("---")  # Add a horizontal line between records
             if counter==limit:
                 break
@@ -223,7 +223,7 @@ if search: #only triggers the search if the search button is clicked
         uniquex5=[club for club in datax5 if club_countsx5[club["NAME"]] == 1]
         for record in uniquex5:
             counter+=1
-            format_database_record(record)#return the list of club infos
+            format_database_record(record)      #return the list of club infos
             fig = go.Figure(go.Indicator(mode = "gauge+number",
             value = 50,
             domain = {'x': [0, 1], 'y': [0, 1]},
@@ -240,7 +240,7 @@ if search: #only triggers the search if the search button is clicked
             if counter==limit:
                 break
 
-    if counter<limit: #return a text if no more club more or less fulfils your criterias, this should not be possible in theory if limit is set at 5
+    if counter<limit:       #return a text if no more club more or less fulfils your criterias, this should not be possible in theory if limit is set at 5
         st.write("There is no other club which more or less fulfils your criterias")
 
 
@@ -259,4 +259,3 @@ if st.button("Team"):
              Yann Bernasconi
             
              """)
-
